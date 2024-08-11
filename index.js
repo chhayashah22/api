@@ -22,7 +22,7 @@ cloudinary.config({
 const app = express();
 app.use(express.json());
 app.use(cors({
-origin: ["https://certificate-7qiu-git-main-chhayas-projects-d7e774f2.vercel.app/"], 
+origin: ["https://certificate-38z3-git-main-chhayas-projects-d7e774f2.vercel.app/"], 
 methods:["GET","POST","PUT","DELETE"],
 credentials: true
 }));
