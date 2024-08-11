@@ -45,9 +45,7 @@ const SECRET_KEY=process.env.SECRET_KEY;
 
 //******************************************middleware***************************************//
 
-app.get(req,res=>{
-  res.send("hello")
-})
+
 const verifyUser =async (req, res,next) => {  
   const token = req.headers.authorization;
   // console.log(token);
