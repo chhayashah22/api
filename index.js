@@ -22,10 +22,18 @@ cloudinary.config({
 const app = express();
 app.use(express.json());
 app.use(cors({
-origin: ["https://certificate-38z3-git-main-chhayas-projects-d7e774f2.vercel.app/"], 
-methods:["GET","POST","PUT","DELETE"],
-credentials: true
+  origin: '*', // Allow requests from any origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  credentials:'true',
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'] // Allow specific headers
 }));
+
+app.options('*', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.sendStatus(200); // Send a 200 response for preflight requests
+});
 
 app.use(express.urlencoded({extended:true}));
 // SMTP Configuration for Gmail
