@@ -231,7 +231,7 @@ app.post('/api/form', async (req, res) => {
                 <body>
                     <div class="container">
                         <h2>Welcome, ${name}!</h2>
-                        <a href="http://localhost:8083/verify?token=${token}" target="_blank">Verify Email</a>
+                        <a href="https://certificate-38z3.vercel.app/verify?token=${token}" target="_blank">Verify Email</a>
                         <P>Link will Expire in 5 min</p>
                         
                     </div>
