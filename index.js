@@ -28,12 +28,7 @@ app.use(cors({
 }));
 
 // Handle preflight requests
-app.options('*', (req, res) => {
-  res.header("Access-Control-Allow-Origin", "https://certificate-38z3.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.sendStatus(200);
-});
+app.options('*', cors());
 
 app.use(express.urlencoded({extended:true}));
 // SMTP Configuration for Gmail
