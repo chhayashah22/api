@@ -186,7 +186,7 @@ app.get('/api/get-subscription',verifyUser, async (req, res) => {
     
 app.post('/api/form', async (req, res) => {
     const { name, email, password } = req.body;
-    const user = new User({ name, email, password });
+  
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
