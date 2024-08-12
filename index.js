@@ -22,19 +22,10 @@ cloudinary.config({
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: 'https://certificate-38z3.vercel.app', // Allow only your frontend domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+  origin: 'https://certificate-38z3.vercel.app', // Replace with your frontend URL
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
-
-// Handle preflight requests
-app.options('*', (req, res) => {
-  res.header("Access-Control-Allow-Origin", "https://certificate-38z3.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.sendStatus(200);
-});
-
 app.use(express.urlencoded({extended:true}));
 // SMTP Configuration for Gmail
 const transporter = nodemailer.createTransport({
