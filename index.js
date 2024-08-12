@@ -251,7 +251,7 @@ app.post('/api/form', async (req, res) => {
 
 
 // Email verification endpoint
-app.get('/verify', async (req, res) => {
+app.get('/api/verify', async (req, res) => {
   const token = req.query.token; 
   if (!token) {
       return res.status(400).send({ message: 'Token is missing' });
@@ -293,7 +293,7 @@ app.get('/verify', async (req, res) => {
         </head>
         <body>
             <h1>Email Verified Successfully</h1>
-            <p>Your email has been successfully verified. You can now <a href="http://localhost:5173/signin">sign in</a>.</p>
+            <p>Your email has been successfully verified. You can now <a href="https://certificate-38z3.vercel.app/signin">sign in</a>.</p>
         </body>
         </html>`
     );
