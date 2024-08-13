@@ -23,7 +23,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   origin: '*', // Allow all origins 
-methods:["GET","POST","PUT","DELETE"],
+
 credentials: true
 }));
 // Handle preflight requests
