@@ -26,7 +26,8 @@ app.use(cors({
 methods:["GET","POST","PUT","DELETE"],
 credentials: true
 }));
-
+// Handle preflight requests
+app.options('*', cors());
 app.use(express.urlencoded({extended:true}));
 // SMTP Configuration for Gmail
 const transporter = nodemailer.createTransport({
