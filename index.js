@@ -22,12 +22,16 @@ cloudinary.config({
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: '*', // Allow all origins 
-
+  origin: 'https://certificate-38z3.vercel.app', 
 credentials: true
 }));
 // Handle preflight requests
-app.options('*', cors());
+app.options('*', cors(
+  {
+    origin: 'https://certificate-38z3.vercel.app', 
+    credentials: true
+  }
+));
 app.use(express.urlencoded({extended:true}));
 // SMTP Configuration for Gmail
 const transporter = nodemailer.createTransport({
