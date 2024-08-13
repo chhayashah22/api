@@ -75,10 +75,16 @@ const verifyUser =async (req, res,next) => {
 
 
 //  ****************************************************Connection*********************************************
-mongoose.connect(URL)
-    .then(() => console.log("connected to MongoDB"))
-    .catch(error => console.log("Error connecting to MongoDB:", error));
+async function connectToDb() {
+  try {
+      await mongoose.connect(URL);
+      console.log("Connected to MongoDB");
+  } catch (error) {
+      console.log("Error connecting to MongoDB:", error);
+  }
+}
 
+connectToDb();
   //  ************************************************LoGOUT******************************************************//
 
 
