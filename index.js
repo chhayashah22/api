@@ -199,7 +199,7 @@ app.get('/api/get-subscription',verifyUser, async (req, res) => {
 
 
     
-app.post('/api/form', async (req, res) => {
+app.post('/form', async (req, res) => {
     const { name, email, password } = req.body;
   
     try {
@@ -319,7 +319,7 @@ app.get('/api/verify', async (req, res) => {
 });
 
 //**************************************LOGIN CONTROLLER*************************************** */
-app.post('/api/Sign', async (req, res) => {
+app.post('/Sign', async (req, res) => {
   const { email, password } = req.body;
   console.log(email,password);
   try {
