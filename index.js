@@ -88,7 +88,7 @@ connectToDb();
   //  ************************************************LoGOUT******************************************************//
 
 
-    app.post('/api/logout', (req, res) => {
+    app.post('/logout', (req, res) => {
       res.clearCookie('token'); // Clear the authentication cookie
       res.status(200).json({ message: 'Logged out successfully' });
     });
@@ -99,7 +99,7 @@ connectToDb();
    //*******************************************Subsription*************************************************** */
    
     // Create customer
-app.post('/api/create-customer', async (req, res) => {
+app.post('/create-customer', async (req, res) => {
   const { email } = req.body;
   try {
     const customer = await stripe.customers.create({ email });
@@ -110,7 +110,7 @@ app.post('/api/create-customer', async (req, res) => {
 });
 
 // Create subscription
-app.post('/api/create-subscription', async (req, res) => {
+app.post('/create-subscription', async (req, res) => {
   const { customerId, priceId, paymentMethodId } = req.body;
 
   try {
@@ -142,7 +142,7 @@ app.post('/api/create-subscription', async (req, res) => {
   }
 });
 //update
-app.post('/api/update-subscription', async (req, res) => {
+app.post('/update-subscription', async (req, res) => {
   const { userId, subscriptionStatus ,endDate,planstatus } = req.body;
   console.log(planstatus)
   console.log('Received data:', { userId, subscriptionStatus, endDate, planstatus });
@@ -172,7 +172,7 @@ app.post('/api/update-subscription', async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 });
-app.get('/api/get-subscription',verifyUser, async (req, res) => {
+app.get('/get-subscription',verifyUser, async (req, res) => {
   const  userId  = req.userId; // Get userId from request body
 
   try {
@@ -246,7 +246,8 @@ app.post('/form', async (req, res) => {
                 <body>
                     <div class="container">
                         <h2>Welcome, ${name}!</h2>
-                        <a href="https://certificate-38z3.vercel.app/verify?token=${token}" target="_blank">Verify Email</a>
+                        <a href='https://certificate-38z3-git-main-chhayas-projects-d7e774f2.vercel.app', 
+/verify?token=${token}" target="_blank">Verify Email</a>
                         <P>Link will Expire in 5 min</p>
                         
                     </div>
@@ -266,7 +267,7 @@ app.post('/form', async (req, res) => {
 
 
 // Email verification endpoint
-app.get('/api/verify', async (req, res) => {
+app.get('/verify', async (req, res) => {
   const token = req.query.token; 
   if (!token) {
       return res.status(400).send({ message: 'Token is missing' });
@@ -308,7 +309,8 @@ app.get('/api/verify', async (req, res) => {
         </head>
         <body>
             <h1>Email Verified Successfully</h1>
-            <p>Your email has been successfully verified. You can now <a href="https://certificate-38z3.vercel.app/signin">sign in</a>.</p>
+            <p>Your email has been successfully verified. You can now <a href= 'https://certificate-38z3-git-main-chhayas-projects-d7e774f2.vercel.app/signin', 
+>sign in</a>.</p>
         </body>
         </html>`
     );
@@ -361,7 +363,7 @@ app.post('/Sign', async (req, res) => {
 
 
   //**********************************************Forgot password*******************************
-  app.post('/api/resetPassword', async (req, res) => {
+  app.post('/resetPassword', async (req, res) => {
     const { email } = req.body;
     try {
         const user = await User.findOne({ email });
@@ -373,7 +375,7 @@ app.post('/Sign', async (req, res) => {
         
         const resetToken = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: "5m" });
 
-        const resetUrl = `http://localhost:5173/Resetpassword/${user._id}/${resetToken}`;
+        const resetUrl = `https://certificate-38z3-git-main-chhayas-projects-d7e774f2.vercel.app/Resetpassword/${user._id}/${resetToken}`;
         const mailOptions = {
             from: "shahchhaya607@gmail.com",
             to: email,
@@ -394,7 +396,7 @@ app.post('/Sign', async (req, res) => {
     }
 });
 
-app.get('/api/Resetpassword/:userId/:resetToken',async(req,res)=>{
+app.get('/Resetpassword/:userId/:resetToken',async(req,res)=>{
     const {userId,resetToken}=req.params;
     res.send({userId,resetToken});
    
@@ -403,7 +405,7 @@ app.get('/api/Resetpassword/:userId/:resetToken',async(req,res)=>{
 
 // *************************Update password*********************************//
 
-app.post('/api/Updatepassword', async (req, res) => {
+app.post('/Updatepassword', async (req, res) => {
     const { resetToken, newPassword } = req.body;
   
     try {
@@ -443,7 +445,7 @@ app.post('/api/Updatepassword', async (req, res) => {
   
   const upload = multer({ storage: storage });
 
-  app.post('/api/submitform', verifyUser, upload.fields([{ name: 'file' }, { name: 'sign' }]), async (req, res) => {
+  app.post('/submitform', verifyUser, upload.fields([{ name: 'file' }, { name: 'sign' }]), async (req, res) => {
     const { name, course, date, certificateUrl, signUrl } = req.body;
    
     const userId = req.userId;  // Get userId from the request
@@ -476,7 +478,7 @@ app.post('/api/Updatepassword', async (req, res) => {
   });
 
 
-  app.post('/api/certificates/:id/generate', verifyUser, async (req, res) => {
+  app.post('/certificates/:id/generate', verifyUser, async (req, res) => {
     try {
       const { id } = req.params;
       const { certificateId } = req.body;  
@@ -501,7 +503,7 @@ app.post('/api/Updatepassword', async (req, res) => {
   
     //fetchh certificates
   
-    app.get('/api/certificates', verifyUser, async (req, res) => {
+    app.get('/certificates', verifyUser, async (req, res) => {
       const userId = req.userId;
       console.log(userId);
     
@@ -522,7 +524,7 @@ app.post('/api/Updatepassword', async (req, res) => {
     });
     
 
-    app.get('/api/certificates/:id', async (req, res) => {
+    app.get('/certificates/:id', async (req, res) => {
       try {
         const certificate = await Form.findById(req.params.id);
         if (!certificate) {
@@ -534,7 +536,7 @@ app.post('/api/Updatepassword', async (req, res) => {
       }
     });
 
-    app.put('/api/certificates/:id', async (req, res) => {
+    app.put('/certificates/:id', async (req, res) => {
       try {
         const { name, course, date } = req.body;
         const { id } = req.params;
