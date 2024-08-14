@@ -221,14 +221,14 @@ app.post('/form', async (req, res) => {
          
         
        const token = jwt.sign({userId: newUser._id}, SECRET_KEY, { expiresIn: '5m' });   
-        const mailOptions = {
-            from: process.env.USER,
-            to: email,
-            subject: 'Verification',
-            html: `<html>
+       const mailOptions = {
+        from: process.env.USER,
+        to: email,
+        subject: 'Verification',
+        html: `
+            <html>
                 <head>
                     <style>
-                        /* Add your CSS styles here */
                         body {
                             font-family: Arial, sans-serif;
                         }
@@ -246,14 +246,14 @@ app.post('/form', async (req, res) => {
                 <body>
                     <div class="container">
                         <h2>Welcome, ${name}!</h2>
-                        <a href='https://certificate-38z3-git-main-chhayas-projects-d7e774f2.vercel.app/verify?token=${token}' target="_blank'>Verify Email</a>
-                        <P>Link will Expire in 5 min</p>
-                        
+                        <a href='https://certificate-38z3-git-main-chhayas-projects-d7e774f2.vercel.app/verify?token=${token}' target="_blank">Verify Email</a>
+                        <p>Link will expire in 5 minutes</p>
                     </div>
                 </body>
-                </html>
-            `
-        };
+            </html>
+        `
+    };
+    
         const result = await transporter.sendMail(mailOptions);        
         res.status(200).send({message:'Email sent successfully'});  
                  
@@ -273,7 +273,7 @@ app.get('/verify', async (req, res) => {
   }
   
   try {
-    const decode=jwt.decode(token);
+   
     const decoded = jwt.verify(token, SECRET_KEY); 
     
 
