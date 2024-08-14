@@ -222,7 +222,7 @@ app.post('/form', async (req, res) => {
         
        const token = jwt.sign({userId: newUser._id}, SECRET_KEY, { expiresIn: '5m' });   
         const mailOptions = {
-            from: 'shahchhaya607@gmail.com',
+            from: process.env.USER,
             to: email,
             subject: 'Verification',
             html: `<html>
@@ -246,7 +246,7 @@ app.post('/form', async (req, res) => {
                 <body>
                     <div class="container">
                         <h2>Welcome, ${name}!</h2>
-                        <a href='https://certificate-38z3-git-main-chhayas-projects-d7e774f2.vercel.app/verify?token=${token}" target="_blank'>Verify Email</a>
+                        <a href='https://certificate-38z3-git-main-chhayas-projects-d7e774f2.vercel.app/verify?token=${token}' target="_blank'>Verify Email</a>
                         <P>Link will Expire in 5 min</p>
                         
                     </div>
