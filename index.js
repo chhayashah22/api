@@ -34,7 +34,7 @@ app.options('*', cors(
 ));
 
 app.get('/', (req, res) => {
-  res.send('Hello, World!'); 
+  res.send('Hello, World listen!'); 
 });
 app.use(express.urlencoded({extended:true}));
 // SMTP Configuration for Gmail
