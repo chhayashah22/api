@@ -214,6 +214,7 @@ app.post('/form', async (req, res) => {
               password: hashedPassword,
               
             });
+
         
             
             await newUser.save();
@@ -266,7 +267,7 @@ app.post('/form', async (req, res) => {
 
 
 // Email verification endpoint
-app.get('/verify', async (req, res) => {
+app.get('/verify/:token', async (req, res) => {
   const token = req.query.token; 
   if (!token) {
       return res.status(400).send({ message: 'Token is missing' });
@@ -353,7 +354,7 @@ app.post('/Sign', async (req, res) => {
     if (!existingUser.verified) {
       return res.status(405).json({ message: "User not verified" });
     }  
-    
+  
   } catch (error) {
     
     return res.status(500).json({ message: "Internal server error",error });
