@@ -268,26 +268,21 @@ app.post('/form', async (req, res) => {
 
 // Email verification endpoint
 app.get('/verify/:token', async (req, res) => {
-  const token = req.query.token; 
+  const token = req.params.token; // Use req.params for route parameters
   if (!token) {
       return res.status(400).send({ message: 'Token is missing' });
   }
-  
+
   try {
-   
-    const decoded = jwt.verify(token, SECRET_KEY); 
-    
-
-      
+      const decoded = jwt.verify(token, SECRET_KEY);
       const user = await User.findById(decoded.userId);
-
 
       if (!user) {
           return res.status(400).send({ message: 'Invalid User ID' });
       }
 
       if (user.verified) {
-      return res.send({message:"user verified"})
+          return res.send({ message: "User already verified" });
       }
 
       // Mark user as verified
@@ -295,30 +290,29 @@ app.get('/verify/:token', async (req, res) => {
       await user.save();
 
       res.status(200).send(`
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Verification Successful</title>
-            <style>
-                body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-                h1 { color: green; }
-                p { font-size: 1.2em; }
-            </style>
-        </head>
-        <body>
-            <h1>Email Verified Successfully</h1>
-            <p>Your email has been successfully verified. You can now <a href= 'https://certificate-38z3-git-main-chhayas-projects-d7e774f2.vercel.app/signin', 
->sign in</a>.</p>
-        </body>
-        </html>`
-    );
-        
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Verification Successful</title>
+              <style>
+                  body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+                  h1 { color: green; }
+                  p { font-size: 1.2em; }
+              </style>
+          </head>
+          <body>
+              <h1>Email Verified Successfully</h1>
+              <p>Your email has been successfully verified. You can now <a href='https://certificate-38z3-git-main-chhayas-projects-d7e774f2.vercel.app/signin'>sign in</a>.</p>
+          </body>
+          </html>
+      `);
   } catch (error) {
       res.status(400).send({ message: `Error verifying email: ${error.message}` });
   }
 });
+
 
 //**************************************LOGIN CONTROLLER*************************************** */
 app.post('/Sign', async (req, res) => {
