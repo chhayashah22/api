@@ -411,8 +411,8 @@ app.post('/Updatepassword', async (req, res) => {
       if (!user) {
         return res.status(404).send('User not found.');
       }
-  
-      user.password = newPassword;
+      const resethashedPassword = await hashpassword(newPassword);
+      user.password = resethashedPassword;
       await user.save();
   
       res.send("Password updated successfully!");
